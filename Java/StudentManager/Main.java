@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        StudentManager studentManager = new StudentManager(5);
+        StudentManager studentManager = new StudentManager();
 
         while (true) {
             System.out.println();

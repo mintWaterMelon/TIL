@@ -1,51 +1,49 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class StudentManager {
 
-    private Student[] students;
-    private int count;
+    private List<Student> students;
 
-    public StudentManager(int size) {
-        this.students = new Student[size];
-        this.count = 0;
+    public StudentManager() {
+        this.students = new ArrayList<>();
     }
 
     public void addStudent(String name, int score) {
-        if (count >= students.length) {
-            System.out.println("더 이상 학생을 추가할 수 없습니다.");
-            return;
-        }
-
-        students[count] = new Student(name, score);
-        count++;
+        Student student = new Student(name, score);
+        students.add(student);
 
         System.out.println("학생이 추가되었습니다.");
     }
 
     public void printStudents() {
-        if (count == 0) {
+        if (students.isEmpty()) {
             System.out.println("등록된 학생이 없습니다.");
             return;
         }
 
         System.out.println("==== 학생 목록 ====");
 
-        for (int i = 0; i < count; i++) {
-            students[i].printInfo();
+        for (int i = 0; i < students.size(); i++) {
+            Student student = students.get(i);
+            student.printInfo();
         }
     }
 
     public void printAverageScore() {
-        if (count == 0) {
+        if (students.isEmpty()) {
             System.out.println("등록된 학생이 없습니다.");
             return;
         }
 
         int totalScore = 0;
 
-        for (int i = 0; i < count; i++) {
-            totalScore += students[i].getScore();
+        for (int i = 0; i < students.size(); i++) {
+            Student student = students.get(i);
+            totalScore += student.getScore();
         }
 
-        double average = (double) totalScore / count;
+        double average = (double) totalScore / students.size();
 
         System.out.println("평균 점수: " + average);
     }
