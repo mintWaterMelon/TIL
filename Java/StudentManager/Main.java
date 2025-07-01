@@ -12,6 +12,7 @@ public class Main {
             System.out.println("1. 학생 추가");
             System.out.println("2. 학생 목록 조회");
             System.out.println("3. 평균 점수 조회");
+            System.out.println("4. 학생 이름 검색");
             System.out.println("0. 종료");
             System.out.print("메뉴를 선택하세요: ");
 
@@ -34,6 +35,11 @@ public class Main {
                 studentManager.printStudents();
             } else if (menu == 3) {
                 studentManager.printAverageScore();
+            } else if (menu == 4) {
+                System.out.print("검색할 학생 이름: ");
+                String name = scanner.next();
+
+                studentManager.searchStudentByName(name);
             } else {
                 System.out.println("잘못된 메뉴입니다.");
             }

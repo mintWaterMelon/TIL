@@ -47,4 +47,28 @@ public class StudentManager {
 
         System.out.println("평균 점수: " + average);
     }
+
+    public void searchStudentByName(String name) {
+        if (students.isEmpty()) {
+            System.out.println("등록된 학생이 없습니다.");
+            return;
+        }
+
+        boolean found = false;
+
+        System.out.println("==== 학생 검색 결과 ====");
+
+        for (int i = 0; i < students.size(); i++) {
+            Student student = students.get(i);
+
+            if (student.getName().equals(name)) {
+                student.printInfo();
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("해당 이름의 학생을 찾을 수 없습니다.");
+        }
+    }
 }
