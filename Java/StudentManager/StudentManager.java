@@ -90,4 +90,23 @@ public class StudentManager {
 
         System.out.println("해당 이름의 학생을 찾을 수 없습니다.");
     }
+
+    public void updateStudentScore(String name, int newScore) {
+        if (students.isEmpty()) {
+            System.out.println("등록된 학생이 없습니다.");
+            return;
+        }
+
+        for (int i = 0; i < students.size(); i++) {
+            Student student = students.get(i);
+
+            if (student.getName().equals(name)) {
+                student.setScore(newScore);
+                System.out.println("학생 점수가 수정되었습니다.");
+                return;
+            }
+        }
+
+        System.out.println("해당 이름의 학생을 찾을 수 없습니다.");
+    }
 }

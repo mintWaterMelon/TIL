@@ -16,6 +16,10 @@ public class Student {
         return score;
     }
 
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     public void printInfo() {
         System.out.println("이름: " + name + ", 점수: " + score);
     }
