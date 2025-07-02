@@ -24,7 +24,21 @@ public class Student {
         this.score = score;
     }
 
+    public String getGrade() {
+        if (score >= 90) {
+            return "A";
+        } else if (score >= 80) {
+            return "B";
+        } else if (score >= 70) {
+            return "C";
+        } else if (score >= 60) {
+            return "D";
+        } else {
+            return "F";
+        }
+    }
+
     public void printInfo() {
-        System.out.println("이름: " + name + ", 점수: " + score);
+        System.out.println("이름: " + name + ", 점수: " + score + ", 등급: " + getGrade());
     }
 }
