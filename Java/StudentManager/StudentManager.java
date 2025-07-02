@@ -10,10 +10,14 @@ public class StudentManager {
     }
 
     public void addStudent(String name, int score) {
-        Student student = new Student(name, score);
-        students.add(student);
+        try {
+            Student student = new Student(name, score);
+            students.add(student);
 
-        System.out.println("학생이 추가되었습니다.");
+            System.out.println("학생이 추가되었습니다.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void printStudents() {
@@ -101,8 +105,13 @@ public class StudentManager {
             Student student = students.get(i);
 
             if (student.getName().equals(name)) {
-                student.setScore(newScore);
-                System.out.println("학생 점수가 수정되었습니다.");
+                try {
+                    student.setScore(newScore);
+                    System.out.println("학생 점수가 수정되었습니다.");
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                }
+
                 return;
             }
         }
