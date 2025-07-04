@@ -16,6 +16,7 @@ public class Main {
             System.out.println("5. 학생 삭제");
             System.out.println("6. 학생 점수 수정");
             System.out.println("7. 최고 점수 학생 조회");
+            System.out.println("8. 점수 높은 순 정렬 조회");
             System.out.println("0. 종료");
             System.out.print("메뉴를 선택하세요: ");
 
@@ -58,6 +59,8 @@ public class Main {
                 studentManager.updateStudentScore(name, newScore);
             } else if (menu == 7) {
                 studentManager.printTopStudent();
+            } else if (menu == 8) {
+                studentManager.printStudentsSortedByScoreDesc();
             } else {
                 System.out.println("잘못된 메뉴입니다.");
             }
