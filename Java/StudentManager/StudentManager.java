@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class StudentManager {
@@ -148,12 +147,7 @@ public class StudentManager {
 
         List<Student> sortedStudents = new ArrayList<>(students);
 
-        sortedStudents.sort(new Comparator<Student>() {
-            @Override
-            public int compare(Student student1, Student student2) {
-                return student2.getScore() - student1.getScore();
-            }
-        });
+        sortedStudents.sort((student1, student2) -> student2.getScore() - student1.getScore());
 
         System.out.println("==== 점수 높은 순 학생 목록 ====");
 
