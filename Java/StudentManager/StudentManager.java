@@ -157,4 +157,22 @@ public class StudentManager {
             student.printInfo();
         }
     }
+
+    public void printStudentsSortedByNameAsc() {
+        if (students.isEmpty()) {
+            System.out.println("등록된 학생이 없습니다.");
+            return;
+        }
+
+        List<Student> sortedStudents = new ArrayList<>(students);
+
+        sortedStudents.sort(Comparator.comparing(Student::getName));
+
+        System.out.println("==== 이름순 학생 목록 ====");
+
+        for (int i = 0; i < sortedStudents.size(); i++) {
+            Student student = sortedStudents.get(i);
+            student.printInfo();
+        }
+    }
 }
