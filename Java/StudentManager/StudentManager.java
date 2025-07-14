@@ -11,6 +11,11 @@ public class StudentManager {
     }
 
     public void addStudent(String name, int score) {
+        if (existsByName(name)) {
+            System.out.println("이미 등록된 학생 이름입니다.");
+            return;
+        }
+
         try {
             Student student = new Student(name, score);
             students.add(student);
@@ -174,5 +179,17 @@ public class StudentManager {
             Student student = sortedStudents.get(i);
             student.printInfo();
         }
+    }
+
+    private boolean existsByName(String name) {
+        for (int i = 0; i < students.size(); i++) {
+            Student student = students.get(i);
+
+            if (student.getName().equals(name)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
