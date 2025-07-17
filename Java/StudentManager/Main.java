@@ -20,6 +20,7 @@ public class Main {
             System.out.println("9. 이름순 정렬 조회");
             System.out.println("10. 등급별 학생 수 조회");
             System.out.println("11. 특정 등급 학생 목록 조회");
+            System.out.println("12. 점수 범위로 학생 검색");
             System.out.println("0. 종료");
             System.out.print("메뉴를 선택하세요: ");
 
@@ -73,6 +74,14 @@ public class Main {
                 String grade = scanner.next();
 
                 studentManager.printStudentsByGrade(grade);
+            } else if (menu == 12) {
+                System.out.print("최소 점수: ");
+                int minScore = scanner.nextInt();
+
+                System.out.print("최대 점수: ");
+                int maxScore = scanner.nextInt();
+
+                studentManager.searchStudentsByScoreRange(minScore, maxScore);
             } else {
                 System.out.println("잘못된 메뉴입니다.");
             }

@@ -244,6 +244,45 @@ public class StudentManager {
         }
     }
 
+    public void searchStudentsByScoreRange(int minScore, int maxScore) {
+        if (students.isEmpty()) {
+            System.out.println("등록된 학생이 없습니다.");
+            return;
+        }
+
+        if (!isValidScore(minScore) || !isValidScore(maxScore)) {
+            System.out.println("점수는 0점 이상 100점 이하만 입력할 수 있습니다.");
+            return;
+        }
+
+        if (minScore > maxScore) {
+            System.out.println("최소 점수는 최대 점수보다 클 수 없습니다.");
+            return;
+        }
+
+        boolean found = false;
+
+        System.out.println("==== " + minScore + "점 이상 " + maxScore + "점 이하 학생 목록 ====");
+
+        for (int i = 0; i < students.size(); i++) {
+            Student student = students.get(i);
+            int score = student.getScore();
+
+            if (score >= minScore && score <= maxScore) {
+                student.printInfo();
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("해당 점수 범위에 포함되는 학생이 없습니다.");
+        }
+    }
+
+    private boolean isValidScore(int score) {
+        return score >= 0 && score <= 100;
+    }
+
     private boolean isValidGrade(String grade) {
         return grade.equals("A")
                 || grade.equals("B")
