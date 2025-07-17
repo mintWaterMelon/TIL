@@ -213,6 +213,45 @@ public class StudentManager {
         }
     }
 
+    public void printStudentsByGrade(String grade) {
+        if (students.isEmpty()) {
+            System.out.println("등록된 학생이 없습니다.");
+            return;
+        }
+
+        String targetGrade = grade.toUpperCase();
+
+        if (!isValidGrade(targetGrade)) {
+            System.out.println("등급은 A, B, C, D, F 중 하나만 입력할 수 있습니다.");
+            return;
+        }
+
+        boolean found = false;
+
+        System.out.println("==== " + targetGrade + "등급 학생 목록 ====");
+
+        for (int i = 0; i < students.size(); i++) {
+            Student student = students.get(i);
+
+            if (student.getGrade().equals(targetGrade)) {
+                student.printInfo();
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println(targetGrade + "등급 학생이 없습니다.");
+        }
+    }
+
+    private boolean isValidGrade(String grade) {
+        return grade.equals("A")
+                || grade.equals("B")
+                || grade.equals("C")
+                || grade.equals("D")
+                || grade.equals("F");
+    }
+
     private boolean existsByName(String name) {
         for (int i = 0; i < students.size(); i++) {
             Student student = students.get(i);
