@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class StudentManager {
 
@@ -178,6 +180,36 @@ public class StudentManager {
         for (int i = 0; i < sortedStudents.size(); i++) {
             Student student = sortedStudents.get(i);
             student.printInfo();
+        }
+    }
+
+    public void printGradeStatistics() {
+        if (students.isEmpty()) {
+            System.out.println("등록된 학생이 없습니다.");
+            return;
+        }
+
+        Map<String, Integer> gradeCountMap = new LinkedHashMap<>();
+
+        gradeCountMap.put("A", 0);
+        gradeCountMap.put("B", 0);
+        gradeCountMap.put("C", 0);
+        gradeCountMap.put("D", 0);
+        gradeCountMap.put("F", 0);
+
+        for (int i = 0; i < students.size(); i++) {
+            Student student = students.get(i);
+            String grade = student.getGrade();
+
+            int count = gradeCountMap.getOrDefault(grade, 0);
+            gradeCountMap.put(grade, count + 1);
+        }
+
+        System.out.println("==== 등급별 학생 수 ====");
+
+        for (String grade : gradeCountMap.keySet()) {
+            int count = gradeCountMap.get(grade);
+            System.out.println(grade + "등급: " + count + "명");
         }
     }
 
