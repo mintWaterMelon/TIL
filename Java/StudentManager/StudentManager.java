@@ -1,325 +1,98 @@
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.Scanner;
 
-public class StudentManager {
+public class Main {
 
-    private List<Student> students;
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        StudentManager studentManager = new StudentManager();
 
-    public StudentManager() {
-        this.students = new ArrayList<>();
-    }
+        while (true) {
+            System.out.println();
+            System.out.println("==== 학생 관리 프로그램 ====");
+            System.out.println("1. 학생 추가");
+            System.out.println("2. 학생 목록 조회");
+            System.out.println("3. 평균 점수 조회");
+            System.out.println("4. 학생 이름 검색");
+            System.out.println("5. 학생 삭제");
+            System.out.println("6. 학생 점수 수정");
+            System.out.println("7. 최고 점수 학생 조회");
+            System.out.println("8. 점수 높은 순 정렬 조회");
+            System.out.println("9. 이름순 정렬 조회");
+            System.out.println("10. 등급별 학생 수 조회");
+            System.out.println("11. 특정 등급 학생 목록 조회");
+            System.out.println("12. 점수 범위로 학생 검색");
+            System.out.println("13. 최저 점수 학생 조회");
+            System.out.println("14. 점수 낮은 순 정렬 조회");
+            System.out.println("0. 종료");
+            System.out.print("메뉴를 선택하세요: ");
 
-    public void addStudent(String name, int score) {
-        if (existsByName(name)) {
-            System.out.println("이미 등록된 학생 이름입니다.");
-            return;
-        }
+            int menu = scanner.nextInt();
 
-        try {
-            Student student = new Student(name, score);
-            students.add(student);
+            if (menu == 0) {
+                System.out.println("프로그램을 종료합니다.");
+                break;
+            }
 
-            System.out.println("학생이 추가되었습니다.");
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-    }
+            if (menu == 1) {
+                System.out.print("학생 이름: ");
+                String name = scanner.next();
 
-    public void printStudents() {
-        if (students.isEmpty()) {
-            System.out.println("등록된 학생이 없습니다.");
-            return;
-        }
+                System.out.print("학생 점수: ");
+                int score = scanner.nextInt();
 
-        System.out.println("==== 학생 목록 ====");
+                studentManager.addStudent(name, score);
+            } else if (menu == 2) {
+                studentManager.printStudents();
+            } else if (menu == 3) {
+                studentManager.printAverageScore();
+            } else if (menu == 4) {
+                System.out.print("검색할 학생 이름: ");
+                String name = scanner.next();
 
-        for (int i = 0; i < students.size(); i++) {
-            Student student = students.get(i);
-            student.printInfo();
-        }
-    }
+                studentManager.searchStudentByName(name);
+            } else if (menu == 5) {
+                System.out.print("삭제할 학생 이름: ");
+                String name = scanner.next();
 
-    public void printAverageScore() {
-        if (students.isEmpty()) {
-            System.out.println("등록된 학생이 없습니다.");
-            return;
-        }
+                studentManager.deleteStudentByName(name);
+            } else if (menu == 6) {
+                System.out.print("수정할 학생 이름: ");
+                String name = scanner.next();
 
-        int totalScore = 0;
+                System.out.print("새 점수: ");
+                int newScore = scanner.nextInt();
 
-        for (int i = 0; i < students.size(); i++) {
-            Student student = students.get(i);
-            totalScore += student.getScore();
-        }
+                studentManager.updateStudentScore(name, newScore);
+            } else if (menu == 7) {
+                studentManager.printTopStudent();
+            } else if (menu == 8) {
+                studentManager.printStudentsSortedByScoreDesc();
+            } else if (menu == 9) {
+                studentManager.printStudentsSortedByNameAsc();
+            } else if (menu == 10) {
+                studentManager.printGradeStatistics();
+            } else if (menu == 11) {
+                System.out.print("조회할 등급을 입력하세요(A, B, C, D, F): ");
+                String grade = scanner.next();
 
-        double average = (double) totalScore / students.size();
+                studentManager.printStudentsByGrade(grade);
+            } else if (menu == 12) {
+                System.out.print("최소 점수: ");
+                int minScore = scanner.nextInt();
 
-        System.out.println("평균 점수: " + average);
-    }
+                System.out.print("최대 점수: ");
+                int maxScore = scanner.nextInt();
 
-    public void searchStudentByName(String name) {
-        if (students.isEmpty()) {
-            System.out.println("등록된 학생이 없습니다.");
-            return;
-        }
-
-        boolean found = false;
-
-        System.out.println("==== 학생 검색 결과 ====");
-
-        for (int i = 0; i < students.size(); i++) {
-            Student student = students.get(i);
-
-            if (student.getName().equals(name)) {
-                student.printInfo();
-                found = true;
+                studentManager.searchStudentsByScoreRange(minScore, maxScore);
+            } else if (menu == 13) {
+                studentManager.printLowestScoreStudent();
+            } else if (menu == 14) {
+                studentManager.printStudentsSortedByScoreAsc();
+            } else {
+                System.out.println("잘못된 메뉴입니다.");
             }
         }
 
-        if (!found) {
-            System.out.println("해당 이름의 학생을 찾을 수 없습니다.");
-        }
-    }
-
-    public void deleteStudentByName(String name) {
-        if (students.isEmpty()) {
-            System.out.println("등록된 학생이 없습니다.");
-            return;
-        }
-
-        for (int i = 0; i < students.size(); i++) {
-            Student student = students.get(i);
-
-            if (student.getName().equals(name)) {
-                students.remove(i);
-                System.out.println("학생이 삭제되었습니다.");
-                return;
-            }
-        }
-
-        System.out.println("해당 이름의 학생을 찾을 수 없습니다.");
-    }
-
-    public void updateStudentScore(String name, int newScore) {
-        if (students.isEmpty()) {
-            System.out.println("등록된 학생이 없습니다.");
-            return;
-        }
-
-        for (int i = 0; i < students.size(); i++) {
-            Student student = students.get(i);
-
-            if (student.getName().equals(name)) {
-                try {
-                    student.setScore(newScore);
-                    System.out.println("학생 점수가 수정되었습니다.");
-                } catch (IllegalArgumentException e) {
-                    System.out.println(e.getMessage());
-                }
-
-                return;
-            }
-        }
-
-        System.out.println("해당 이름의 학생을 찾을 수 없습니다.");
-    }
-
-    public void printTopStudent() {
-        if (students.isEmpty()) {
-            System.out.println("등록된 학생이 없습니다.");
-            return;
-        }
-
-        Student topStudent = students.get(0);
-
-        for (int i = 1; i < students.size(); i++) {
-            Student student = students.get(i);
-
-            if (student.getScore() > topStudent.getScore()) {
-                topStudent = student;
-            }
-        }
-
-        System.out.println("==== 최고 점수 학생 ====");
-        topStudent.printInfo();
-    }
-
-    public void printLowestScoreStudent() {
-        if (students.isEmpty()) {
-            System.out.println("등록된 학생이 없습니다.");
-            return;
-        }
-
-        Student lowestScoreStudent = students.get(0);
-
-        for (int i = 1; i < students.size(); i++) {
-            Student student = students.get(i);
-
-            if (student.getScore() < lowestScoreStudent.getScore()) {
-                lowestScoreStudent = student;
-            }
-        }
-
-        System.out.println("==== 최저 점수 학생 ====");
-        lowestScoreStudent.printInfo();
-    }
-
-    public void printStudentsSortedByScoreDesc() {
-        if (students.isEmpty()) {
-            System.out.println("등록된 학생이 없습니다.");
-            return;
-        }
-
-        List<Student> sortedStudents = new ArrayList<>(students);
-
-        sortedStudents.sort(Comparator.comparing(Student::getScore).reversed());
-
-        System.out.println("==== 점수 높은 순 학생 목록 ====");
-
-        for (int i = 0; i < sortedStudents.size(); i++) {
-            Student student = sortedStudents.get(i);
-            student.printInfo();
-        }
-    }
-
-    public void printStudentsSortedByNameAsc() {
-        if (students.isEmpty()) {
-            System.out.println("등록된 학생이 없습니다.");
-            return;
-        }
-
-        List<Student> sortedStudents = new ArrayList<>(students);
-
-        sortedStudents.sort(Comparator.comparing(Student::getName));
-
-        System.out.println("==== 이름순 학생 목록 ====");
-
-        for (int i = 0; i < sortedStudents.size(); i++) {
-            Student student = sortedStudents.get(i);
-            student.printInfo();
-        }
-    }
-
-    public void printGradeStatistics() {
-        if (students.isEmpty()) {
-            System.out.println("등록된 학생이 없습니다.");
-            return;
-        }
-
-        Map<String, Integer> gradeCountMap = new LinkedHashMap<>();
-
-        gradeCountMap.put("A", 0);
-        gradeCountMap.put("B", 0);
-        gradeCountMap.put("C", 0);
-        gradeCountMap.put("D", 0);
-        gradeCountMap.put("F", 0);
-
-        for (int i = 0; i < students.size(); i++) {
-            Student student = students.get(i);
-            String grade = student.getGrade();
-
-            int count = gradeCountMap.getOrDefault(grade, 0);
-            gradeCountMap.put(grade, count + 1);
-        }
-
-        System.out.println("==== 등급별 학생 수 ====");
-
-        for (String grade : gradeCountMap.keySet()) {
-            int count = gradeCountMap.get(grade);
-            System.out.println(grade + "등급: " + count + "명");
-        }
-    }
-
-    public void printStudentsByGrade(String grade) {
-        if (students.isEmpty()) {
-            System.out.println("등록된 학생이 없습니다.");
-            return;
-        }
-
-        String targetGrade = grade.toUpperCase();
-
-        if (!isValidGrade(targetGrade)) {
-            System.out.println("등급은 A, B, C, D, F 중 하나만 입력할 수 있습니다.");
-            return;
-        }
-
-        boolean found = false;
-
-        System.out.println("==== " + targetGrade + "등급 학생 목록 ====");
-
-        for (int i = 0; i < students.size(); i++) {
-            Student student = students.get(i);
-
-            if (student.getGrade().equals(targetGrade)) {
-                student.printInfo();
-                found = true;
-            }
-        }
-
-        if (!found) {
-            System.out.println(targetGrade + "등급 학생이 없습니다.");
-        }
-    }
-
-    public void searchStudentsByScoreRange(int minScore, int maxScore) {
-        if (students.isEmpty()) {
-            System.out.println("등록된 학생이 없습니다.");
-            return;
-        }
-
-        if (!isValidScore(minScore) || !isValidScore(maxScore)) {
-            System.out.println("점수는 0점 이상 100점 이하만 입력할 수 있습니다.");
-            return;
-        }
-
-        if (minScore > maxScore) {
-            System.out.println("최소 점수는 최대 점수보다 클 수 없습니다.");
-            return;
-        }
-
-        boolean found = false;
-
-        System.out.println("==== " + minScore + "점 이상 " + maxScore + "점 이하 학생 목록 ====");
-
-        for (int i = 0; i < students.size(); i++) {
-            Student student = students.get(i);
-            int score = student.getScore();
-
-            if (score >= minScore && score <= maxScore) {
-                student.printInfo();
-                found = true;
-            }
-        }
-
-        if (!found) {
-            System.out.println("해당 점수 범위에 포함되는 학생이 없습니다.");
-        }
-    }
-
-    private boolean isValidScore(int score) {
-        return score >= 0 && score <= 100;
-    }
-
-    private boolean isValidGrade(String grade) {
-        return grade.equals("A")
-                || grade.equals("B")
-                || grade.equals("C")
-                || grade.equals("D")
-                || grade.equals("F");
-    }
-
-    private boolean existsByName(String name) {
-        for (int i = 0; i < students.size(); i++) {
-            Student student = students.get(i);
-
-            if (student.getName().equals(name)) {
-                return true;
-            }
-        }
-
-        return false;
+        scanner.close();
     }
 }
