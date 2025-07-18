@@ -147,6 +147,26 @@ public class StudentManager {
         topStudent.printInfo();
     }
 
+    public void printLowestScoreStudent() {
+        if (students.isEmpty()) {
+            System.out.println("등록된 학생이 없습니다.");
+            return;
+        }
+
+        Student lowestScoreStudent = students.get(0);
+
+        for (int i = 1; i < students.size(); i++) {
+            Student student = students.get(i);
+
+            if (student.getScore() < lowestScoreStudent.getScore()) {
+                lowestScoreStudent = student;
+            }
+        }
+
+        System.out.println("==== 최저 점수 학생 ====");
+        lowestScoreStudent.printInfo();
+    }
+
     public void printStudentsSortedByScoreDesc() {
         if (students.isEmpty()) {
             System.out.println("등록된 학생이 없습니다.");
