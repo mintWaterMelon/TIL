@@ -23,6 +23,7 @@ public class Main {
             System.out.println("12. 점수 범위로 학생 검색");
             System.out.println("13. 최저 점수 학생 조회");
             System.out.println("14. 점수 낮은 순 정렬 조회");
+            System.out.println("15. 특정 등급 평균 점수 조회");
             System.out.println("0. 종료");
             System.out.print("메뉴를 선택하세요: ");
 
@@ -88,6 +89,11 @@ public class Main {
                 studentManager.printLowestScoreStudent();
             } else if (menu == 14) {
                 studentManager.printStudentsSortedByScoreAsc();
+            } else if (menu == 15) {
+                System.out.print("평균 점수를 조회할 등급을 입력하세요(A, B, C, D, F): ");
+                String grade = scanner.next();
+
+                studentManager.printAverageScoreByGrade(grade);
             } else {
                 System.out.println("잘못된 메뉴입니다.");
             }
