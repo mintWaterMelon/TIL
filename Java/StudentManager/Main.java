@@ -24,6 +24,7 @@ public class Main {
             System.out.println("13. 최저 점수 학생 조회");
             System.out.println("14. 점수 낮은 순 정렬 조회");
             System.out.println("15. 특정 등급 평균 점수 조회");
+            System.out.println("16. 합격 / 불합격 학생 수 조회");
             System.out.println("0. 종료");
             System.out.print("메뉴를 선택하세요: ");
 
@@ -94,6 +95,8 @@ public class Main {
                 String grade = scanner.next();
 
                 studentManager.printAverageScoreByGrade(grade);
+            } else if (menu == 16) {
+                studentManager.printPassFailStatistics();
             } else {
                 System.out.println("잘못된 메뉴입니다.");
             }
