@@ -376,6 +376,48 @@ public class StudentManager {
         System.out.println("불합격: " + failCount + "명");
     }
 
+    public void printStudentsByPassFail(String status) {
+        if (students.isEmpty()) {
+            System.out.println("등록된 학생이 없습니다.");
+            return;
+        }
+
+        String targetStatus = status.toLowerCase();
+
+        if (!targetStatus.equals("pass") && !targetStatus.equals("fail")) {
+            System.out.println("pass 또는 fail만 입력할 수 있습니다.");
+            return;
+        }
+
+        boolean found = false;
+
+        if (targetStatus.equals("pass")) {
+            System.out.println("==== 합격 학생 목록 ====");
+        } else {
+            System.out.println("==== 불합격 학생 목록 ====");
+        }
+
+        for (int i = 0; i < students.size(); i++) {
+            Student student = students.get(i);
+
+            if (targetStatus.equals("pass") && student.getScore() >= 60) {
+                student.printInfo();
+                found = true;
+            } else if (targetStatus.equals("fail") && student.getScore() < 60) {
+                student.printInfo();
+                found = true;
+            }
+        }
+
+        if (!found) {
+            if (targetStatus.equals("pass")) {
+                System.out.println("합격 학생이 없습니다.");
+            } else {
+                System.out.println("불합격 학생이 없습니다.");
+            }
+        }
+    }
+
     private boolean isValidScore(int score) {
         return score >= 0 && score <= 100;
     }
