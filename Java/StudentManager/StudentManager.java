@@ -46,6 +46,17 @@ public class StudentManager {
         System.out.println("전체 학생 수: " + students.size() + "명");
     }
 
+    public void deleteAllStudents() {
+        if (students.isEmpty()) {
+            System.out.println("삭제할 학생이 없습니다.");
+            return;
+        }
+
+        students.clear();
+
+        System.out.println("모든 학생이 삭제되었습니다.");
+    }
+
     public void printAverageScore() {
         if (students.isEmpty()) {
             System.out.println("등록된 학생이 없습니다.");

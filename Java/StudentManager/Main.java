@@ -27,6 +27,7 @@ public class Main {
             System.out.println("16. 합격 / 불합격 학생 수 조회");
             System.out.println("17. 합격 / 불합격 학생 목록 조회");
             System.out.println("18. 전체 학생 수 조회");
+            System.out.println("19. 전체 학생 삭제");
             System.out.println("0. 종료");
             System.out.print("메뉴를 선택하세요: ");
 
@@ -106,6 +107,15 @@ public class Main {
                 studentManager.printStudentsByPassFail(status);
             } else if (menu == 18) {
                 studentManager.printStudentCount();
+            } else if (menu == 19) {
+                System.out.print("정말 모든 학생을 삭제하시겠습니까? (yes/no): ");
+                String answer = scanner.next();
+
+                if (answer.equalsIgnoreCase("yes")) {
+                    studentManager.deleteAllStudents();
+                } else {
+                    System.out.println("전체 학생 삭제를 취소했습니다.");
+                }
             } else {
                 System.out.println("잘못된 메뉴입니다.");
             }
