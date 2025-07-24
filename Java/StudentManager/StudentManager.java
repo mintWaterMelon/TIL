@@ -42,6 +42,10 @@ public class StudentManager {
         }
     }
 
+    public void printStudentCount() {
+        System.out.println("전체 학생 수: " + students.size() + "명");
+    }
+
     public void printAverageScore() {
         if (students.isEmpty()) {
             System.out.println("등록된 학생이 없습니다.");
