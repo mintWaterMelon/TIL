@@ -28,6 +28,7 @@ public class Main {
             System.out.println("17. 합격 / 불합격 학생 목록 조회");
             System.out.println("18. 전체 학생 수 조회");
             System.out.println("19. 전체 학생 삭제");
+            System.out.println("20. 이름 일부로 학생 검색");
             System.out.println("0. 종료");
             System.out.print("메뉴를 선택하세요: ");
 
@@ -116,6 +117,11 @@ public class Main {
                 } else {
                     System.out.println("전체 학생 삭제를 취소했습니다.");
                 }
+            } else if (menu == 20) {
+                System.out.print("검색할 이름 일부를 입력하세요: ");
+                String keyword = scanner.next();
+
+                studentManager.searchStudentsByNameKeyword(keyword);
             } else {
                 System.out.println("잘못된 메뉴입니다.");
             }

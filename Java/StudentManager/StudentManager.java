@@ -99,6 +99,32 @@ public class StudentManager {
         }
     }
 
+    public void searchStudentsByNameKeyword(String keyword) {
+        if (students.isEmpty()) {
+            System.out.println("등록된 학생이 없습니다.");
+            return;
+        }
+
+        boolean found = false;
+        String lowerKeyword = keyword.toLowerCase();
+
+        System.out.println("==== 이름 일부 검색 결과 ====");
+
+        for (int i = 0; i < students.size(); i++) {
+            Student student = students.get(i);
+            String lowerName = student.getName().toLowerCase();
+
+            if (lowerName.contains(lowerKeyword)) {
+                student.printInfo();
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("이름에 '" + keyword + "'이 포함된 학생을 찾을 수 없습니다.");
+        }
+    }
+
     public void deleteStudentByName(String name) {
         if (students.isEmpty()) {
             System.out.println("등록된 학생이 없습니다.");
