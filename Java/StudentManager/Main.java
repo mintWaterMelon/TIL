@@ -30,6 +30,7 @@ public class Main {
             System.out.println("19. 전체 학생 삭제");
             System.out.println("20. 이름 일부로 학생 검색");
             System.out.println("21. 학생 이름 변경");
+            System.out.println("22. 학생 점수 증가 / 감소");
             System.out.println("0. 종료");
             System.out.print("메뉴를 선택하세요: ");
 
@@ -131,6 +132,14 @@ public class Main {
                 String newName = scanner.next();
 
                 studentManager.updateStudentName(currentName, newName);
+            } else if (menu == 22) {
+                System.out.print("점수를 변경할 학생 이름: ");
+                String name = scanner.next();
+
+                System.out.print("증가 또는 감소할 점수 입력: ");
+                int amount = scanner.nextInt();
+
+                studentManager.changeStudentScore(name, amount);
             } else {
                 System.out.println("잘못된 메뉴입니다.");
             }
