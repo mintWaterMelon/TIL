@@ -31,6 +31,7 @@ public class Main {
             System.out.println("20. 이름 일부로 학생 검색");
             System.out.println("21. 학생 이름 변경");
             System.out.println("22. 학생 점수 증가 / 감소");
+            System.out.println("23. 학생 존재 여부 확인");
             System.out.println("0. 종료");
             System.out.print("메뉴를 선택하세요: ");
 
@@ -140,6 +141,11 @@ public class Main {
                 int amount = scanner.nextInt();
 
                 studentManager.changeStudentScore(name, amount);
+            } else if (menu == 23) {
+                System.out.print("존재 여부를 확인할 학생 이름: ");
+                String name = scanner.next();
+
+                studentManager.checkStudentExists(name);
             } else {
                 System.out.println("잘못된 메뉴입니다.");
             }
