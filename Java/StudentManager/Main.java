@@ -33,9 +33,8 @@ public class Main {
             System.out.println("22. 학생 점수 증가 / 감소");
             System.out.println("23. 학생 존재 여부 확인");
             System.out.println("0. 종료");
-            System.out.print("메뉴를 선택하세요: ");
 
-            int menu = scanner.nextInt();
+            int menu = readInt(scanner, "메뉴를 선택하세요: ");
 
             if (menu == 0) {
                 System.out.println("프로그램을 종료합니다.");
@@ -46,8 +45,7 @@ public class Main {
                 System.out.print("학생 이름: ");
                 String name = scanner.next();
 
-                System.out.print("학생 점수: ");
-                int score = scanner.nextInt();
+                int score = readInt(scanner, "학생 점수: ");
 
                 studentManager.addStudent(name, score);
             } else if (menu == 2) {
@@ -68,8 +66,7 @@ public class Main {
                 System.out.print("수정할 학생 이름: ");
                 String name = scanner.next();
 
-                System.out.print("새 점수: ");
-                int newScore = scanner.nextInt();
+                int newScore = readInt(scanner, "새 점수: ");
 
                 studentManager.updateStudentScore(name, newScore);
             } else if (menu == 7) {
@@ -86,11 +83,8 @@ public class Main {
 
                 studentManager.printStudentsByGrade(grade);
             } else if (menu == 12) {
-                System.out.print("최소 점수: ");
-                int minScore = scanner.nextInt();
-
-                System.out.print("최대 점수: ");
-                int maxScore = scanner.nextInt();
+                int minScore = readInt(scanner, "최소 점수: ");
+                int maxScore = readInt(scanner, "최대 점수: ");
 
                 studentManager.searchStudentsByScoreRange(minScore, maxScore);
             } else if (menu == 13) {
@@ -137,8 +131,7 @@ public class Main {
                 System.out.print("점수를 변경할 학생 이름: ");
                 String name = scanner.next();
 
-                System.out.print("증가 또는 감소할 점수 입력: ");
-                int amount = scanner.nextInt();
+                int amount = readInt(scanner, "증가 또는 감소할 점수 입력: ");
 
                 studentManager.changeStudentScore(name, amount);
             } else if (menu == 23) {
@@ -152,5 +145,18 @@ public class Main {
         }
 
         scanner.close();
+    }
+
+    private static int readInt(Scanner scanner, String message) {
+        while (true) {
+            System.out.print(message);
+
+            if (scanner.hasNextInt()) {
+                return scanner.nextInt();
+            }
+
+            System.out.println("숫자만 입력할 수 있습니다.");
+            scanner.next();
+        }
     }
 }
