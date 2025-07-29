@@ -45,7 +45,7 @@ public class Main {
                 System.out.print("학생 이름: ");
                 String name = scanner.next();
 
-                int score = readInt(scanner, "학생 점수: ");
+                int score = readScore(scanner, "학생 점수: ");
 
                 studentManager.addStudent(name, score);
             } else if (menu == 2) {
@@ -66,7 +66,7 @@ public class Main {
                 System.out.print("수정할 학생 이름: ");
                 String name = scanner.next();
 
-                int newScore = readInt(scanner, "새 점수: ");
+                int newScore = readScore(scanner, "새 점수: ");
 
                 studentManager.updateStudentScore(name, newScore);
             } else if (menu == 7) {
@@ -83,8 +83,8 @@ public class Main {
 
                 studentManager.printStudentsByGrade(grade);
             } else if (menu == 12) {
-                int minScore = readInt(scanner, "최소 점수: ");
-                int maxScore = readInt(scanner, "최대 점수: ");
+                int minScore = readScore(scanner, "최소 점수: ");
+                int maxScore = readScore(scanner, "최대 점수: ");
 
                 studentManager.searchStudentsByScoreRange(minScore, maxScore);
             } else if (menu == 13) {
@@ -157,6 +157,18 @@ public class Main {
 
             System.out.println("숫자만 입력할 수 있습니다.");
             scanner.next();
+        }
+    }
+
+    private static int readScore(Scanner scanner, String message) {
+        while (true) {
+            int score = readInt(scanner, message);
+
+            if (score >= 0 && score <= 100) {
+                return score;
+            }
+
+            System.out.println("점수는 0점 이상 100점 이하만 입력할 수 있습니다.");
         }
     }
 }
