@@ -29,6 +29,7 @@ public class Main {
             System.out.println("18. 전체 학생 수 조회");
             System.out.println("19. 전체 학생 삭제");
             System.out.println("20. 이름 일부로 학생 검색");
+            System.out.println("21. 학생 이름 변경");
             System.out.println("0. 종료");
             System.out.print("메뉴를 선택하세요: ");
 
@@ -122,6 +123,14 @@ public class Main {
                 String keyword = scanner.next();
 
                 studentManager.searchStudentsByNameKeyword(keyword);
+            } else if (menu == 21) {
+                System.out.print("변경할 학생의 현재 이름: ");
+                String currentName = scanner.next();
+
+                System.out.print("새 이름: ");
+                String newName = scanner.next();
+
+                studentManager.updateStudentName(currentName, newName);
             } else {
                 System.out.println("잘못된 메뉴입니다.");
             }

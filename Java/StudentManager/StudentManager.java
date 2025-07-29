@@ -125,6 +125,30 @@ public class StudentManager {
         }
     }
 
+    public void updateStudentName(String currentName, String newName) {
+        if (students.isEmpty()) {
+            System.out.println("등록된 학생이 없습니다.");
+            return;
+        }
+
+        if (existsByName(newName)) {
+            System.out.println("이미 등록된 학생 이름입니다.");
+            return;
+        }
+
+        for (int i = 0; i < students.size(); i++) {
+            Student student = students.get(i);
+
+            if (student.getName().equals(currentName)) {
+                student.setName(newName);
+                System.out.println("학생 이름이 변경되었습니다.");
+                return;
+            }
+        }
+
+        System.out.println("해당 이름의 학생을 찾을 수 없습니다.");
+    }
+
     public void deleteStudentByName(String name) {
         if (students.isEmpty()) {
             System.out.println("등록된 학생이 없습니다.");
