@@ -28,6 +28,16 @@ public class StudentManager {
         }
     }
 
+    public void addSampleStudents() {
+        addSampleStudentIfNotExists("Kim", 95);
+        addSampleStudentIfNotExists("Lee", 82);
+        addSampleStudentIfNotExists("Park", 76);
+        addSampleStudentIfNotExists("Choi", 59);
+        addSampleStudentIfNotExists("Jung", 43);
+
+        System.out.println("테스트용 예시 학생이 추가되었습니다.");
+    }
+
     public void printStudents() {
         if (students.isEmpty()) {
             System.out.println("등록된 학생이 없습니다.");
@@ -522,6 +532,13 @@ public class StudentManager {
             } else {
                 System.out.println("불합격 학생이 없습니다.");
             }
+        }
+    }
+
+    private void addSampleStudentIfNotExists(String name, int score) {
+        if (!existsByName(name)) {
+            Student student = new Student(name, score);
+            students.add(student);
         }
     }
 

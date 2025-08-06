@@ -48,6 +48,7 @@ public class Main {
         System.out.println("21. 학생 이름 변경");
         System.out.println("22. 학생 점수 증가 / 감소");
         System.out.println("23. 학생 존재 여부 확인");
+        System.out.println("24. 테스트용 예시 학생 추가");
         System.out.println("0. 종료");
     }
 
@@ -150,6 +151,8 @@ public class Main {
             String name = scanner.next();
 
             studentManager.checkStudentExists(name);
+        } else if (menu == 24) {
+            studentManager.addSampleStudents();
         } else {
             System.out.println("잘못된 메뉴입니다.");
         }
